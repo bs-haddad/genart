@@ -17,7 +17,7 @@ from django.dispatch import receiver
 #     def __str__(self):
 #         return self.username
 
-
+# Look up Table? 
 accessibility = { 
     "high-contrast": 1, 
 }
@@ -25,12 +25,13 @@ accessibility = {
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     preferences = models.CharField("Accessibility", max_length=255, blank=True, null=True)
-
+    #TODO
+    # Or we do boolean and list every trait of the profile...
+    
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
