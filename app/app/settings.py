@@ -151,22 +151,22 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'https://www.googleapis.com/auth/userinfo.email',
-            # 'https://www.googleapis.com/auth/user.birthday.read',
-            # 'https://www.googleapis.com/auth/userinfo.profile'
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    },
-}
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'https://www.googleapis.com/auth/userinfo.email',
+#             # 'https://www.googleapis.com/auth/user.birthday.read',
+#             # 'https://www.googleapis.com/auth/userinfo.profile'
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         }
+#     },
+# }
 
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
