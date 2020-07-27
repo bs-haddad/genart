@@ -10,6 +10,7 @@ django = "*"
 django-allauth = "*"
 django-crispy-forms = "*"
 django-pure-pagination = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"

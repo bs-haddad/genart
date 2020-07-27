@@ -28,17 +28,27 @@ def art(request, art_id):
     return render(request, 'artgen/art.html', {'art': art})
 
 
+def handle_uploaded_file(f, id):
+    filepath = "/media/images/user/{}".format(id)
+    with open(filepath, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+    return filepath
+
 def art_new(request):
     if request.method == "POST":
-        form = ArtForm(request.POST)
+        form = ArtForm(request.POST, request.FILES)
+        print(request.FILES)
+
         if form.is_valid():
-            art = form.save(commit=False)
+            # form.save()
+            art = form.save(commit=True)
             art.creator = request.user
             art.date_created = timezone.now()
             art.save()
-            return redirect('art', pk=art.pk)
-
-        # TODO 
+            return redirect('/')
+        # TODO
         # Run Function for AI
     else: 
         form = ArtForm()
