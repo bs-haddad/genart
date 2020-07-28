@@ -30,7 +30,7 @@ class Art(models.Model):
         "Created At", auto_now_add=True)    
     image_1 = models.ImageField(upload_to='images/')
     image_2 = models.ImageField(upload_to='images/')
-    # filepath = models.FileField(upload_to='images/', null=True, blank=True)
+    filepath = models.ImageField(upload_to='images/', null=True, blank=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
