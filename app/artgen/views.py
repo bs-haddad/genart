@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ArtForm
 from .forms import CustomUserCreationForm
+from .genart import *
 
 from .models import * 
 
@@ -47,6 +48,8 @@ def art_new(request):
             art.creator = request.user
             art.date_created = timezone.now()
             art.save()
+            save_path = "./app/media/generated/" + art.title + ".jpg"
+            genImage(art.image_1.file.name, art.image_2.file.name, save_path)
             return redirect('/')
         # TODO
         # Run Function for AI

@@ -137,6 +137,8 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+if not os.path.exists(os.path.join(MEDIA_ROOT, 'generated')):
+    os.makedirs(os.path.join(MEDIA_ROOT, 'generated'))
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
