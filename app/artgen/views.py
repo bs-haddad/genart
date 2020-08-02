@@ -23,6 +23,21 @@ def profile(request, user_id):
     
     return render(request, 'artgen/user.html', {'user': user})
 
+def art_like(request, art_id):
+    new_like, created = Like.objects.get_or_create(user=request.user, art=art_id)
+    if not created:
+        # the user already liked this picture before -- unlike the photo
+        new_like.delete()
+        pass
+    else:
+        # the user hasnt liked this picture before -- add like
+        new_like.save()
+
+def get_art_likes(request, art_id):
+    art = Art.objects.get(pk=art_id)
+    number_of_likes = art.like_set.all().count()
+    return number_of_likes
+
 def art(request, art_id): 
     art = get_object_or_404(Art, pk=art_id)
 
