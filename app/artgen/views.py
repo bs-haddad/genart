@@ -56,7 +56,7 @@ def art_new(request):
             art.filepath = save_path 
             art.save()
 
-            return redirect('/')
+            return redirect('art', art_id=art.id)
     else: 
         form = ArtForm()
 
