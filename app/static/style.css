@@ -1,0 +1,13 @@
+body {
+    text-align: center;
+    font-family: "patrick hand";
+}
+
+
+/* ===================  Login Page  =================*/
+#login-title {
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 5%;
+    font-size: 450%;
+}
