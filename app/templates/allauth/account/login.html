@@ -45,15 +45,15 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p> -->
     <button type="submit" class="btn btn-primary form-submit-button"><i class="fas fa-sign-in-alt"></i> Sign in</button>
     <br />
     <br />
+    {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
     <button class="btn btn-primary form-submit-button invert-button">
         <a href="{% url 'account_signup' %}">{% trans "Register new account" %}</a>
     </button>
     <br />
     <br />
     <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Need help signing in?" %}</a>
-    {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
   </form>
 </div>
 
