@@ -36,12 +36,25 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p> -->
 <div class="form-container">
   <form class="login" method="POST" action="{% url 'account_login' %}">
     {% csrf_token %}
+
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <p class="errornote">
+        {{ error }}
+    </p>
+    {% endfor %}
+    {% endif %}
+
     <div class="form-group">
-      <input type="username" class="form-control form-input" id="username" placeholder="Username" name="{{ form.login }}
+      {{ form.login.errors }}
+      <div class="form-control form-input"> {{ form.login }} </div>
     </div>
+
     <div class="form-group">
-      <input type="password" class="form-control form-input" id="password" placeholder="Password" name="{{ form.password }}
+      {{ form.password.errors }}
+      <div class="form-control form-input"> {{ form.password }} </div>
     </div>
+    
     <button type="submit" class="btn btn-primary form-submit-button"><i class="fas fa-sign-in-alt"></i> Sign in</button>
     <br />
     <br />
