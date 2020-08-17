@@ -1,0 +1,23 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block content %}
+{% if artlist %}
+<div class="card-deck">
+    {% for art in artlist %}
+    <div class="card">
+        <img class="card-img-top" src="{{ art.filepath }}" alt="Card image cap" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ art.title }}</h5>
+        </div>
+    </div class="card">
+    {% endfor %}
+</div>
+{% else %}
+<p>No arts are available</p>
+
+{% endif %}
+<br>
+<h1> Testing landing page! for design</h1>
+{% endblock %}
+
