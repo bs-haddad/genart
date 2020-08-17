@@ -2,6 +2,20 @@
 {% load static %}
 
 {% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Art Generator!</h1>
+    <h2 class="lead"; style="font-size:30px">ArtGen is a simple web-application that enables users to experience a unique art-experience.</h2>
+    <hr class="my-4">
+    <p style="font-size:30px">Generating Art <br> Made Easy</p>
+    <p class="lead">
+    
+
+    <a class="btn btn-primary btn-lg" href="{% url 'account_signup' %}" role="button">Register Now!</a>
+  </p>
+</div>
+<hr>
+<h1> Recent Artworks</h1>
+<br>
 {% if artlist %}
 <div class="card-deck">
     {% for art in artlist %}
@@ -18,6 +32,6 @@
 
 {% endif %}
 <br>
-<h1> Testing landing page! for design</h1>
+
 {% endblock %}
 
