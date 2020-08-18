@@ -4,14 +4,15 @@
 {% block content %}
 <div class="jumbotron">
     <h1 class="display-4">Art Generator!</h1>
-    <h2 class="lead"; style="font-size:30px">ArtGen is a simple web-application that enables users to experience a unique art-experience.</h2>
+    <h2 class="lead" ; style="font-size:30px">ArtGen is a simple web-application that enables users to experience a
+        unique art-experience.</h2>
     <hr class="my-4">
     <p style="font-size:30px">Generating Art <br> Made Easy</p>
     <p class="lead">
-    
 
-    <a class="btn btn-primary btn-lg" href="{% url 'account_signup' %}" role="button">Register Now!</a>
-  </p>
+
+        <a class="btn btn-primary btn-lg" href="{% url 'account_signup' %}" role="button">Register Now!</a>
+    </p>
 </div>
 <hr>
 <h1> Recent Artworks</h1>
@@ -23,13 +24,18 @@
         <img class="card-img-top" src="{{ art.filepath }}" alt="Card image cap" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">{{ art.title }}</h5>
-                {{ user.is_authenticated }}
-
             {% if user == art.creator %}
-                <a href="{% url 'art_delete' art.id %}">Delete</a>
-
->Delete</button>
+            <a href="{% url 'art_delete' art.id %}">Delete</a>
             {% endif %}
+
+            <form action="{% url 'art_like' art.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-default" name="art_like" href="{% url 'art_like' art.id %}">
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    Like {{ art.number }}
+                </button>
+            </form>
+
         </div>
     </div>
     {% endfor %}
@@ -40,5 +46,6 @@
 {% endif %}
 <br>
 
-{% endblock %}
 
+
+{% endblock %}

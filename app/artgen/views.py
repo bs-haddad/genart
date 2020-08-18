@@ -10,6 +10,10 @@ from .genart import *
 
 from .models import * 
 
+from django.http import HttpResponseRedirect
+
+
+
 def index(request):
     artlist = Art.objects.order_by('-date_created')[:5]
     context = {
@@ -23,20 +27,48 @@ def profile(request, user_id):
     
     return render(request, 'artgen/user.html', {'user': user})
 
-def art_like(request, art_id):
-    new_like, created = Like.objects.get_or_create(user=request.user, art=art_id)
-    if not created:
-        # the user already liked this picture before -- unlike the photo
-        new_like.delete()
-        pass
-    else:
-        # the user hasnt liked this picture before -- add like
-        new_like.save()
+# def art_like(request, art_id):
+#     new_like, created = Like.objects.get_or_create(user=request.user, art=art_id)
+#     if not created:
+#         # the user already liked this picture before -- unlike the photo
+#         new_like.delete()
+#         pass
+#     else:
+#         # the user hasnt liked this picture before -- add like
+#         new_like.save()
 
-def get_art_likes(request, art_id):
-    art = Art.objects.get(pk=art_id)
-    number_of_likes = art.like_set.all().count()
-    return number_of_likes
+def art_like(request, art_id):
+    print("TEST")
+    if request.method == "POST":
+        art = get_object_or_404(Art, id=art_id)
+
+        like, created = Like.objects.get_or_create(user=request.user, art=art)
+
+        if created: 
+            art.number += 1 
+            art.save()
+        else: 
+            like.delete()
+            art.number -= 1 
+            art.save()
+
+    return redirect("/")
+
+        # like, created = Like.objects.get_or_create(user=request.user, art=art_id)
+        # # new_like, created = Like.objects.get_or_create(user=request.user, art=art_id)
+        # if not created:
+        # #     # the user already liked this picture before -- unlike the photo
+        #     new_like.delete()
+        #     art.number += 1 
+        #     art.save()
+        #     pass
+        # else:
+        # #     # the user hasnt liked this picture before -- add like
+        #     new_like.save()
+        #     art.number -= 1 
+        #     art.save()
+        #     pass
+
 
 def art(request, art_id): 
     art = get_object_or_404(Art, pk=art_id)
@@ -55,6 +87,9 @@ def art_new(request):
             genImage(art.image_1.file.name, art.image_2.file.name, "." + save_path)
             art.filepath = save_path 
             art.save()
+
+            like = Like(user=request.user, art=art)
+            like.save()
 
             return redirect('art', art_id=art.id)
     else: 
