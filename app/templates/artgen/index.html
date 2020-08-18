@@ -23,8 +23,15 @@
         <img class="card-img-top" src="{{ art.filepath }}" alt="Card image cap" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">{{ art.title }}</h5>
+                {{ user.is_authenticated }}
+
+            {% if user == art.creator %}
+                <a href="{% url 'art_delete' art.id %}">Delete</a>
+
+>Delete</button>
+            {% endif %}
         </div>
-    </div class="card">
+    </div>
     {% endfor %}
 </div>
 {% else %}

@@ -79,6 +79,11 @@ def art_edit(request, pk):
         form = ArtForm(instance=art)
     return render(request, 'artgen/art_edit.html', {'form': form})
 
+def art_delete(request, art_id=None):
+    art = Art.objects.get(id=art_id)
+    art.delete()
+    return redirect('index')
+
 # class SignUp(generic.CreateView):
 #     form_class = UserCreationForm
 #     success_url = reverse_lazy('login')
