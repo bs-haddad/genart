@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'dark-mode.css' %}">
         <script src="https://kit.fontawesome.com/14e4960703.js" crossorigin="anonymous"></script>
 
         <title>Artgen</title>
@@ -39,6 +40,12 @@
                     <a class="nav-item nav-link" href="{% url 'account_login'%}" style="font-size:35px;padding-left:500px;color:white">Login</a>
                     <a class="nav-item nav-link" href="{% url 'account_signup' %}" style="font-size:35px;color:white">Register</a>
                     {% endif %}
+
+                    <div class="nav-item custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+                        <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+                    </div>
+                    <script src="{% static 'dark-mode-switch.min.js' %} "></script>
                 </div>
             </div>
         </nav>
