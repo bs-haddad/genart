@@ -49,7 +49,7 @@ def genImage(content_image_path, style_image_path, new_image_name):
   content_image = load_img(content_image_path)
   style_image = load_img(style_image_path)
 
-  hub_module = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/1')
+  hub_module = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
   stylized_image = hub_module(tf.constant(content_image), tf.constant(style_image))[0]
   tensor_to_image(stylized_image).save(new_image_name)
 
